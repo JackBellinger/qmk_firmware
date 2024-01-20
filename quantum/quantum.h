@@ -28,7 +28,7 @@
 #    include "led_matrix.h"
 #endif
 
-#if defined(RGBLIGHT_ENABLE)
+#ifdef RGBLIGHT_ENABLE
 #    include "rgblight.h"
 #endif
 
