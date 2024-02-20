@@ -17,7 +17,7 @@ void blog_url(void) {
     SEND_STRING("https://jackbellinger.github.io/blog");
 }
 void screenshot(void) {
-    SEND_STRING(SS_TAP(X_PSCR) SS_LGUI("r") SS_DELAY(500) "mspaint" SS_TAP(X_ENTER) SS_DELAY(600) SS_LCTL("v"));
+    SEND_STRING(SS_LALT(SS_TAP(X_PSCR)) SS_LGUI("r") SS_DELAY(500) "mspaint" SS_TAP(X_ENTER) SS_DELAY(600) SS_LCTL("v"));
 }
 
 /* Generate function to check if keycode is a macro */
