@@ -23,7 +23,7 @@ void screenshot(void) {
 /* Generate function to check if keycode is a macro */
 int KC_isMacro(uint16_t keycode) {
     switch (keycode) {
-#define MACRO(a, b, c) case a:
+#define MACRO(a, b) case a:
         MACRO_TABLE
 #undef MACRO
         return 1;
@@ -33,7 +33,7 @@ int KC_isMacro(uint16_t keycode) {
 
 /* Generate Macro keycode to function map*/
 struct action macros = {{
-#define MACRO(a, b, c) &c,
+#define MACRO(a, b) &b,
     MACRO_TABLE
 #undef MACRO
 }};
