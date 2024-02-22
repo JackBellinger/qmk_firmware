@@ -48,14 +48,9 @@ extern struct action macros;
 */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	if (!process_layer_lock(keycode, record, LLOCK)) { return false; }
+	// if (!process_temporal_dynamic_macro(keycode, record, TDM)) { return false; }
 	if (!process_mouse_turbo_click(keycode, record, TURBO)) { return false; }
-	// if (!process_mouse_turbo_click(keycode, record)) { return false; }
-	if (KC_isMacro(keycode)) {
-		if (record->event.pressed) {
-			send_macro(keycode);
-			return true;
-		}
-	}
+	if (!process_macro(keycode, record)) { return false; }
 	return true;
 };
 
@@ -79,9 +74,6 @@ void keyboard_post_init_user(void) {
 #ifdef AUDIO_ENABLE
 	float caps_on[][2] = SONG(CAPS_LOCK_ON_SOUND);
 	float caps_off[][2] = SONG(CAPS_LOCK_OFF_SOUND);
-	float leader_start_song[][2] = SONG(ONE_UP_SOUND);
-	float leader_succeed_song[][2] = SONG(ALL_STAR);
-	float leader_fail_song[][2] = SONG(RICK_ROLL);
 #endif
 
 bool led_update_user(led_t led_state) {

@@ -1,4 +1,7 @@
-#include "jack.h"
+#include "tap_dance.h"
+#include "../custom_keycodes.h" //set_oneshot_layer(FUNCS...
+#include "macro.h" //send_macro
+#include "timer.h" //send_timer
 
 td_state_t cur_dance(tap_dance_state_t *state) {
 	if (state->count == 1) {
@@ -73,8 +76,8 @@ void PLAY_reset(tap_dance_state_t *state, void *user_data) {
 void TASKBAR_finished(tap_dance_state_t *state, void *user_data) {
 	TASKBAR_tap_state.state = cur_dance(state);
 	switch (TASKBAR_tap_state.state) {
-		case TD_SINGLE_TAP: send_macro(MAC_EDITOR); break;
-		case TD_DOUBLE_TAP: send_macro(MAC_TERMINAL); break;
+		case TD_SINGLE_TAP: send_macro(MAC_EDITOR, NULL); break;
+		case TD_DOUBLE_TAP: send_macro(MAC_TERMINAL, NULL); break;
 		case TD_TRIPLE_TAP: SEND_STRING(SS_LGUI("3")); break;
 		case TD_QUAD_TAP: SEND_STRING(SS_LGUI("4")); break;
 		default: break;
@@ -134,10 +137,10 @@ void TIMER_reset(tap_dance_state_t *state, void *user_data) {
 void MACRO_finished(tap_dance_state_t *state, void *user_data) {
 	MACRO_tap_state.state = cur_dance(state);
 	switch (MACRO_tap_state.state) {
-		case TD_SINGLE_TAP: send_macro(MAC_SEARCH); break;
-		case TD_DOUBLE_TAP: send_macro(MAC_SCREENSHOT); break;
-		// case TD_TRIPLE_TAP: send_macro(MAC_SEARCH); break;
-		// case TD_QUAD_TAP: send_macro(MAC_SEARCH); break;
+		case TD_SINGLE_TAP: send_macro(MAC_SEARCH, NULL); break;
+		case TD_DOUBLE_TAP: send_macro(MAC_SCREENSHOT, NULL); break;
+		// case TD_TRIPLE_TAP: send_macro(MAC_SEARCH, NULL); break;
+		// case TD_QUAD_TAP: send_macro(MAC_SEARCH, NULL); break;
 		default: break;
 	}
 }
@@ -163,8 +166,8 @@ void CTRL_finished(tap_dance_state_t *state, void *user_data) {
 			set_oneshot_layer(1, ONESHOT_START); set_oneshot_layer(1, ONESHOT_PRESSED); break;
 		case TD_DOUBLE_HOLD: //SEND_STRING("2h"); 
 			register_code(KC_LCTL); layer_on(1); break;
-		// case TD_TRIPLE_TAP: send_macro(MAC_SEARCH); break;
-		// case TD_QUAD_TAP: send_macro(MAC_SEARCH); break;
+		// case TD_TRIPLE_TAP: send_macro(MAC_SEARCH, NULL); break;
+		// case TD_QUAD_TAP: send_macro(MAC_SEARCH, NULL); break;
 		default: break;
 	}
 }
@@ -194,8 +197,8 @@ void ALT_finished(tap_dance_state_t *state, void *user_data) {
 		case TD_SINGLE_HOLD : register_code(KC_LALT); break;
 		case TD_DOUBLE_TAP: set_oneshot_layer(1, ONESHOT_START); set_oneshot_layer(FUNCS, ONESHOT_PRESSED); break;
 		case TD_DOUBLE_HOLD: register_code(KC_LALT); layer_on(1); break;
-		// case TD_TRIPLE_TAP: send_macro(MAC_SEARCH); break;
-		// case TD_QUAD_TAP: send_macro(MAC_SEARCH); break;
+		// case TD_TRIPLE_TAP: send_macro(MAC_SEARCH, NULL); break;
+		// case TD_QUAD_TAP: send_macro(MAC_SEARCH, NULL); break;
 		default: break;
 	}
 }
