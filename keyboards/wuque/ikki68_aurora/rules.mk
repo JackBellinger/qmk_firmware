@@ -22,6 +22,7 @@ CAPS_WORD_ENABLE		= yes	# Caps lock until end of word
 # IO features
 BACKLIGHT_ENABLE		= no	# Backlight
 RGBLIGHT_ENABLE		= yes	# RGB underglow
+OLED_ENABLE				= no
 AUDIO_ENABLE			= no	# In-keyboard audio
 MUSIC_ENABLE			= no
 
@@ -43,6 +44,7 @@ SRC += features/layer_lock.c
 SRC += features/tap_dance.c
 SRC += features/timer.c
 SRC += features/turbo_click.c
+# SRC += features/temporal_dynamic_macro.c
 # SRC += features/rgb.c
 # SRC += features/combos.c
 
